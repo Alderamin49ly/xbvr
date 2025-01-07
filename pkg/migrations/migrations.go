@@ -820,6 +820,15 @@ func Migrate() {
 				return nil
 			},
 		},
+		{
+			ID: "0081-file-has-alpha",
+			Migrate: func(tx *gorm.DB) error {
+				type File struct {
+					HasAlpha bool `json:"has_alpha" gorm:"default:false"`
+				}
+				return tx.AutoMigrate(File{}).Error
+			},
+		},
 
 		// ===============================================================================================
 		// Put DB Schema migrations above this line and migrations that rely on the updated schema below
